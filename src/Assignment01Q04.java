@@ -3,10 +3,28 @@ import java.util.Arrays;
 public class Assignment01Q04 {
 
     public static int[] shiftArrayCyclic(int[] array, int move, char direction) {
-        // TODO: implement
+        int n = array.length;
+    if (n == 0 || (direction != 'R' && direction != 'L')) {
         return array;
     }
-
+    int shift = move % n;
+    if (direction == 'L') {
+        shift = -shift;
+    }
+    if (shift < 0) {
+        shift += n;
+    }
+    int[] temp = new int[n];
+    for (int i = 0; i < n; i++) {
+        int newIndex = (i + shift) % n;
+        temp[newIndex] = array[i];
+    }
+    for (int i = 0; i < n; i++) {
+        array[i] = temp[i];
+    }
+        return array;
+    }
+    
     public static void main(String[] args) {
         System.out.println(Arrays.toString(
             shiftArrayCyclic(new int[]{1, 2, 3, 4, 5}, -1, 'R'))); // [2, 3, 4, 5, 1]
